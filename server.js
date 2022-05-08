@@ -46,4 +46,4 @@ app.use(routes);
 // force false to prevent drop tables on each sync
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log('Now listening'));
-})
+});
