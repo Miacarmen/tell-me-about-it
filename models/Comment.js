@@ -11,12 +11,15 @@ Comment.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: "blogpost",
-        key: "id",
-      },
+    comment_body: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    date_created: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
     post_id: {
       type: DataTypes.INTEGER,
@@ -24,16 +27,13 @@ Comment.init(
         model: "blogpost",
         key: "id",
       },
-    },
-    date_created: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
-    },
-    comment_body: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
+      user_id: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: "user",
+          key: "id",
+        },
+      },
     },
   },
   {

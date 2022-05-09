@@ -11,6 +11,16 @@ BlogPost.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    post_body: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    date_created: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
@@ -22,16 +32,6 @@ BlogPost.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-    },
-    post_body: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    date_created: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-      defaultValue: DataTypes.NOW,
     },
   },
   {

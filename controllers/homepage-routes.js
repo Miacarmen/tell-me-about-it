@@ -54,6 +54,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
         ],
         });
         if(postData) {
+            // use .get({ plain: true  }) on the obj to serialize it so that it only includes the data needed before passing it to the templates in the View
             const post = postData.get({ plain: true });
             // pass serialized data and session flag into template
             res.render('single-post', { post, logged_in: req.session.loggedIn });
@@ -81,7 +82,9 @@ router.get('/signup', (req, res) => {
         res.redirect('/signup');
     }
     res.render('signup');
-})
+});
+
+
 
 module.exports = router;
 
