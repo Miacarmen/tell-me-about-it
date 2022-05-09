@@ -14,11 +14,11 @@ BlogPost.init(
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: "blogpost",
+        model: "user",
         key: "id",
       },
     },
-    post_title: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
