@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
       })
     );
     // pass serialized data and session flag into template
-    res.render("all-posts", { posts, logged_in: req.session.logged_in });
+    res.render("homepage", { posts, logged_in: req.session.logged_in });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -47,17 +47,40 @@ router.get('/post/:id', withAuth, async (req, res) => {
         const postData = await BlogPost.findOne({
             where: {id: req.params.id},
             include: [User, {
-                // ****** WHAT
                 model: Comment,
                 include: User,
             },
         ],
         });
         if(postData) {
-            // use .get({ plain: true  }) on the obj to serialize it so that it only includes the data needed before passing it to the templates in the View
+            // use .get({ plain: true }) on the obj to serialize it so that it only includes the data needed before passing it to the templates in the View
             const post = postData.get({ plain: true });
             // pass serialized data and session flag into template
-            res.render('single-post', { post, logged_in: req.session.loggedIn });
+            res.render('single-blog', { post, logged_in: req.session.loggedIn });
+        } else {
+            res.status(400).end();
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Edit single post
+router.get('/edit/:id', withAuth, async (req, res) => {
+    try {
+        const postData = await BlogPost.findOne({
+            where: {id: req.params.id},
+            include: [User, {
+                model: Comment,
+                include: User,
+            },
+        ],
+        });
+        if(postData) {
+            // use .get({ plain: true }) on the obj to serialize it so that it only includes the data needed before passing it to the templates in the View
+            const post = postData.get({ plain: true });
+            // pass serialized data and session flag into template
+            res.render('edit-post', { post, logged_in: req.session.loggedIn });
         } else {
             res.status(400).end();
         }
@@ -78,8 +101,8 @@ router.get('/login', (req, res) => {
 
 // GET signup
 router.get('/signup', (req, res) => {
-    if(!req.session.logged_in) {
-        res.redirect('/signup');
+    if(req.session.logged_in) {
+        res.redirect('/dashboard');
     }
     res.render('signup');
 });

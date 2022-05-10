@@ -11,6 +11,7 @@ router.post('/', async (req, res) => {
             password: req.body.password
         });
         // automatically logs in the user once they are created
+        // creates session cookie
         req.session.save(() => {
             req.session.user_id = newUser.id;
             req.session.username = newUser.username;
@@ -46,7 +47,7 @@ router.post('/login', async (req, res) => {
         }
         // if user is valid, save login session to the db
         req.session.save(() => {
-            req.session.user_id = userData.isSoftDeleted;
+            req.session.user_id = userData.id;
             req.session.logged_in = true;
 
             res.json({ user: userData, message: 'You are now logged in!' });

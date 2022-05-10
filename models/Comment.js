@@ -21,18 +21,18 @@ Comment.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    post_id: {
+    blogpost_id: {
       type: DataTypes.INTEGER,
       references: {
         model: "blogpost",
         key: "id",
       },
-      user_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: "user",
-          key: "id",
-        },
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "user",
+        key: "id",
       },
     },
   },
@@ -40,7 +40,7 @@ Comment.init(
     sequelize,
     timestamps: false,
     underscored: true,
-    modelName: "project",
+    modelName: "comment",
   }
 );
 

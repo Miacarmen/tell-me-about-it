@@ -1,6 +1,6 @@
 const { BlogPost } = require("../models");
 
-const posts = [
+const postsData = [
   {
     'post_title': "Title",
     'post_body': 'Something about something',
@@ -8,8 +8,7 @@ const posts = [
   },
 ];
 
-const seedBlogPost = () => {
-    BlogPost.bulkCreate(posts);
-};
+const seedBlog = () => 
+    BlogPost.bulkCreate(postsData);
 
-module.exports = seedBlogPost;
+module.exports = seedBlog;

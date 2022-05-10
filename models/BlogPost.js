@@ -11,6 +11,11 @@ BlogPost.init(
       primaryKey: true,
       autoIncrement: true,
     },
+    post_title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
     post_body: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -27,11 +32,6 @@ BlogPost.init(
         model: "user",
         key: "id",
       },
-    },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
     },
   },
   {
