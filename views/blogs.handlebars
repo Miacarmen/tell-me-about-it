@@ -1,5 +1,34 @@
 {{!-- form --}}
+<div class="card">
+    <h2 card="card-header">Create New Post</h2>
+    <form class="card-body" id="new-post">
+        <input type="hidden" name="post-id" value="{{post.id}}">
+        <div>
+            <label class="form-label">Title:</label>
+            <input type="text" class="form-input" name="post-title">
+        </div>
+        <div>
+            <label class="form-label">Content:</label>
+            <textarea class="form-textarea form-input" name="post-body"></textarea>
+        </div>
+        <button class="btn btn-primary">Post Blog</button>
+    </form>
+</div>
 
-
+<section class="container" id="blogs">
+    <h2>All Blog posts</h2>
+    {{#each posts}}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{post_title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{User.username}}</h6>
+            <p class="card-text">{{post_body}}</p>
+            <a href="/post/{{id}}" class="card-link">See Post</a>
+        </div>
+    </div>
+    {{/each}}
+</section>
 {{!-- list of previous posts --}}
 {{!-- edit previous posts --}}
+
+<script src="/js/newpost.js"></script>
